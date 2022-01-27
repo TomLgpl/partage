@@ -70,4 +70,11 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function index() {
+        $isAdmin = $this->Authentication->getIdentity()->get('uti_lien') == '533e08dd-87b4-4117-aac1-dd0879eae9db';
+
+        $this->set(['isAdmin' => $isAdmin]);
+    }
+
 }
