@@ -4,8 +4,14 @@
  * @var array $params
  * @var string $message
  */
-if (!isset($params['escape']) || $params['escape'] !== false) {
-    $message = h($message);
-}
+
 ?>
-<div class="message success" onclick="this.classList.add('hidden')"><?= $message ?></div>
+
+<div class="ui container">
+    <div class="ui success message">
+        <div class="header">
+            <?= $message ?>
+        </div>
+    </div>
+</div>
+<br>

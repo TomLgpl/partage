@@ -8,4 +8,12 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="message error" onclick="this.classList.add('hidden');"><?= $message ?></div>
+<div class="ui container">
+    <div class="ui error message" id="error_message">
+        <div class="header">
+            <?= $message ?>
+        </div>
+        <?= isset($params['error']) ? $params['error'] : ''  ?>
+    </div>
+</div>
+<br>
