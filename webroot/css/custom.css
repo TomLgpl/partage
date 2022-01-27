@@ -1,0 +1,17 @@
+.custom_centrer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.custom_form_center {
+    width : 50%
+}
+
+.hidden {
+    display: none;
+}
+
+
+
