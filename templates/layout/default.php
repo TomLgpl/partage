@@ -42,6 +42,8 @@ $cakeDescription = 'Partage';
           integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
     <?= $this->Html->css('custom.css') ?>
 
 

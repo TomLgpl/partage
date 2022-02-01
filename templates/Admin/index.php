@@ -16,24 +16,30 @@
         </div>
         <div id="miniatures" class="ui small images"></div>
         <br>
-        <button class="ui button" id="send_files">
+        <button class="ui green button" id="send_files">
             <?= __('Envoyer les fichiers') ?>
         </button>
-
+        <br><br>
+        <div class="ui green progress">
+            <div class="bar" id="progress_bar" style="transition-duration: 300ms; width: 0%;">
+                <div class="progress" id="progress_label">0 %</div>
+            </div>
+            <div class="label"><?= __('Envoi des fichiers ...') ?></div>
+        </div>
     </div>
 </div>
 
 <script>
 
-
+    nbItemEnvoye = 0;
+    nbItemTotal = 0;
 
     $(document).ready(function() {
-
+        $('#send_files').addClass('disabled');
     });
 
     $('#afficher_miniatures').change(function() {
-        check = $('#afficher_miniatures').prop("checked");
-        if(check)
+        if($('#afficher_miniatures').prop("checked"))
             updateFilesMiniature();
         else {
             $('#miniatures').empty();
@@ -43,7 +49,19 @@
     $('#input_files').change(function() {
         updateFilesSize();
         updateFilesMiniature();
+        updateButton();
     });
+
+    $('#send_files').click(function () {
+        sendFiles();
+    });
+
+    function updateButton(){
+        if(document.getElementById('input_files').files.length > 0)
+            $('#send_files').removeClass('disabled');
+        else
+            $('#send_files').addClass('disabled');
+    }
 
     function updateFilesSize(){
         var size = 0;
@@ -61,8 +79,9 @@
     }
 
     function updateFilesMiniature(){
-        var afficherMiniatures = $('#afficher_miniatures').prop("checked")
+        const afficherMiniatures = $('#afficher_miniatures').prop("checked")
         if(afficherMiniatures){
+            $('#miniatures').empty();
             var files = document.getElementById('input_files').files;
             for(var i = 0; i < files.length; i++){
                 var file = files[i];
@@ -87,6 +106,47 @@
                 reader.readAsDataURL(file);
             }
         }
+    }
+
+    function sendFiles(){
+        const files = document.getElementById('input_files').files;
+        console.log(files);
+        nbItemTotal = files.length;
+        nbItemEnvoye = 0;
+        for(let i = 0; i < files.length; i++) {
+            sendFile(files[i]);
+        }
+    }
+
+    function updateProgressBar(){
+        nbItemEnvoye++;
+        var progress = Math.trunc( (nbItemEnvoye / nbItemTotal) * 100)
+        $('#progress_bar').width( progress + '%');
+        $('#progress_label').text(progress + ' %')
+
+
+        console.log( (nbItemEnvoye / nbItemTotal) * 100 );
+    }
+
+    function sendFile(file) {
+        let formData = new FormData;
+        formData.append("photo", file);
+        $.ajax({
+            url: "upload",
+            type: "post",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+            },
+            success: function() {
+                updateProgressBar();
+            },
+            error: function() {
+                console.log("fuck")
+            }
+        })
     }
 
 </script>

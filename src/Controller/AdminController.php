@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Cache\Cache;
+
 /**
  * Admin Controller
  *
@@ -10,7 +12,6 @@ namespace App\Controller;
  */
 class AdminController extends AppController
 {
-
     public function index()
     {
 
