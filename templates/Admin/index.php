@@ -5,7 +5,17 @@
 <div class="ui container">
     <br><br>
     <div class="ui segment">
-        <input type="file" id="input_files" multiple accept="image/jpeg, image/png ">
+        <div class="ui input">
+            <input type="date" id="date_files">
+        </div>
+        <br><br>
+        <div class="ui input">
+            <input type="text" id="dir_files" placeholder="Nom du dossier">
+        </div>
+        <br><br>
+        <div class="ui input">
+            <input type="file" id="input_files" multiple accept="image/jpeg, image/png ">
+        </div>
         <br>
         <div id="info" ></div>
         <div class="ui toggle checkbox" id="choix_miniatures">
@@ -110,12 +120,16 @@
 
     function sendFiles(){
         const files = document.getElementById('input_files').files;
-        console.log(files);
+        $('#progress_bar').width('0%');
+        date = $('#date_files').val();
+        dir = $('#dir_files').val();
+        $('#send_files').addClass('disabled');
         nbItemTotal = files.length;
         nbItemEnvoye = 0;
         for(let i = 0; i < files.length; i++) {
-            sendFile(files[i]);
+            sendFile(files[i], date, dir);
         }
+        $('#send_files').removeClass('disabled');
     }
 
     function updateProgressBar(){
@@ -123,28 +137,26 @@
         var progress = Math.trunc( (nbItemEnvoye / nbItemTotal) * 100)
         $('#progress_bar').width( progress + '%');
         $('#progress_label').text(progress + ' %')
-
-
-        console.log( (nbItemEnvoye / nbItemTotal) * 100 );
     }
 
-    function sendFile(file) {
+    function sendFile(file, date, dir) {
         let formData = new FormData;
         formData.append("photo", file);
+        formData.append("date", date);
+        formData.append("dir", dir);
         $.ajax({
             url: "upload",
             type: "post",
             data: formData,
-            contentType: false,
-            cache: false,
             processData: false,
+            contentType: false,
             beforeSend: function() {
             },
             success: function() {
                 updateProgressBar();
             },
             error: function() {
-                console.log("fuck")
+                console.log("Erreur pendant l'envoi d'un fichier");
             }
         })
     }
