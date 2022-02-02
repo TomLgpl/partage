@@ -81,7 +81,7 @@ class ParPhotoTable extends Table
         return $validator;
     }
 
-    public function insertPhoto($nom, $annee, $mois, $jour, $dossier){
+    public function insertPhoto($nom, $annee, $mois, $jour, $dossier, $uti_lien){
         $conn = ConnectionManager::get('default');
         $req = "
             insert into par_photo
@@ -91,7 +91,9 @@ class ParPhotoTable extends Table
                 pho_annee,
                 pho_mois,
                 pho_jour,
-                pho_dossier
+                pho_dossier,
+                pho_ajouter_par,
+                pho_ajouter_date
             )
             values
             (
@@ -100,7 +102,9 @@ class ParPhotoTable extends Table
                 :annee,
                 :mois,
                 :jour,
-                :dossier
+                :dossier,
+                :uti_lien,
+                NULL
             )
         ";
         $param = array(
@@ -109,7 +113,8 @@ class ParPhotoTable extends Table
             'annee' => $annee,
             'mois' => $mois,
             'jour' => $jour,
-            'dossier' => $dossier
+            'dossier' => $dossier,
+            'uti_lien' => $uti_lien
         );
         $conn->execute($req, $param);
     }
