@@ -91,14 +91,16 @@ class ParAssignerTable extends Table
             pho_mois,
             pho_jour,
             pho_dossier,
-            pho_ajouter_par,
+            CONCAT(uti_prenom, ' ', uti_nom) as pho_ajouter_par,
             pho_ajouter_date
             FROM par_photo
+            join par_utilisateurs on par_utilisateurs.uti_lien = par_photo.pho_ajouter_par
             WHERE pho_lien not in
             (
                 SELECT DISTINCT ass_pho_lien
                 FROM par_assigner
             )
+
             order by pho_annee, pho_mois, pho_jour,pho_dossier, pho_nom
             LIMIT 1
         ";
