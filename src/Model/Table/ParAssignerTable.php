@@ -64,7 +64,8 @@ class ParAssignerTable extends Table
         return $validator;
     }
 
-    public function getNbAAssigner() {
+    public function getNbAAssigner()
+    {
         $conn = ConnectionManager::get("default");
         $req = "
             SELECT count(pho_lien) as nb
@@ -77,6 +78,32 @@ class ParAssignerTable extends Table
         ";
         $res = $conn->execute($req)->fetch("assoc");
         return $res["nb"];
+    }
+
+    public function gePhotoInfoAAssigner()
+    {
+        $conn = ConnectionManager::get("default");
+        $req = "
+            SELECT
+            pho_lien,
+            pho_nom,
+            pho_annee,
+            pho_mois,
+            pho_jour,
+            pho_dossier,
+            pho_ajouter_par,
+            pho_ajouter_date
+            FROM par_photo
+            WHERE pho_lien not in
+            (
+                SELECT DISTINCT ass_pho_lien
+                FROM par_assigner
+            )
+            order by pho_annee, pho_mois, pho_jour,pho_dossier, pho_nom
+            LIMIT 1
+        ";
+        $res = $conn->execute($req)->fetchAll('assoc');
+        return $res;
     }
 
 }

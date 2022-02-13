@@ -99,7 +99,7 @@
                     continue;
                 }
 
-                var img = document.createElement("img");
+                const img = document.createElement("img");
                 img.classList.add("ui");
                 img.classList.add("image");
                 img.file = file;
