@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace App\Model\Table;
 
 use Cake\Datasource\ConnectionManager;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -66,7 +64,7 @@ class ParAssignerTable extends Table
 
     public function getNbAAssigner()
     {
-        $conn = ConnectionManager::get("default");
+        $conn = ConnectionManager::get('default');
         $req = "
             SELECT count(pho_lien) as nb
             FROM par_photo
@@ -76,13 +74,14 @@ class ParAssignerTable extends Table
                 FROM par_assigner
             )
         ";
-        $res = $conn->execute($req)->fetch("assoc");
-        return $res["nb"];
+        $res = $conn->execute($req)->fetch('assoc');
+
+        return $res['nb'];
     }
 
     public function gePhotoInfoAAssigner()
     {
-        $conn = ConnectionManager::get("default");
+        $conn = ConnectionManager::get('default');
         $req = "
             SELECT
             pho_lien,
@@ -105,7 +104,29 @@ class ParAssignerTable extends Table
             LIMIT 1
         ";
         $res = $conn->execute($req)->fetchAll('assoc');
+
         return $res;
     }
 
+    public function assigner($pho_lien, $personne)
+    {
+        $conn = ConnectionManager::get('default');
+        $req = "
+            INSERT INTO par_assigner
+            (
+                ass_uti_lien,
+                ass_pho_lien
+            )
+            VALUES
+            (
+                :uti_lien,
+                :pho_lien
+            )
+        ";
+        $param = [
+            'uti_lien' => $personne,
+            'pho_lien' => $pho_lien,
+        ];
+        $conn->execute($req, $param);
+    }
 }

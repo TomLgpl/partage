@@ -6,7 +6,9 @@
 
     <div class="ui top attached tabular menu">
         <a class="item active" data-tab="Ajouter"><?= __('Ajouter') ?></a>
-        <a class="item" data-tab="Assigner"><?= __('Assigner') ?></a>
+        <a class="item" data-tab="Assigner"><?= __('Assigner') ?>
+            <div class="ui red label" id="label_assigner"></div>
+        </a>
         <a class="item" data-tab="third">Third</a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="Ajouter">

@@ -12,7 +12,7 @@
     </div>
     <br><br>
     <div class="ui input">
-        <input type="file" id="input_files" multiple accept="image/jpeg, image/png ">
+        <input type="file" id="input_files" multiple>
     </div>
     <br>
     <div id="info"></div>
@@ -139,6 +139,7 @@
             $('#send_files').removeClass('loading');
             $('#send_files').removeClass('disabled');
             updateNbAAssigner();
+            gePhotoInfoAAssigner();
         }
     }
 

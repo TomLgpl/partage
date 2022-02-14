@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use Cake\Datasource\ConnectionManager;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -95,5 +95,20 @@ class ParUtilisateursTable extends Table
         $rules->add($rules->isUnique(['uti_identifiant']), ['errorField' => 'uti_identifiant']);
 
         return $rules;
+    }
+
+    public function getAllUtilisateurs()
+    {
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT
+            uti_lien,
+            uti_prenom,
+            uti_nom
+            FROM par_utilisateurs
+            order by uti_prenom, uti_nom
+        ";
+
+        return $conn->execute($req)->fetchAll('assoc');
     }
 }
