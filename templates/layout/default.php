@@ -65,6 +65,10 @@ $cakeDescription = 'Partage';
                        class="item <?= $item == "accueil" ? "active" : ""?>">
                         <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
                     </a>
+                    <a href="<?= Router::url(['controller' => 'Photos', 'action' => 'index']) ?>"
+                       class="item <?= $item == "photos" ? "active" : ""?>">
+                        <i class="fa-solid fa-camera"></i>&nbsp;&nbsp;<?= __('Mes photos') ?>
+                    </a>
                     <?php if ($isAdmin): ?>
                         <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
                            class="item <?= $item == "admin" ? "active" : ""?>">
@@ -101,6 +105,10 @@ $cakeDescription = 'Partage';
         <a href="<?= Router::url(['controller' => 'Pages', 'action' => 'index']) ?>"
            class="item <?= $item == "accueil" ? "active" : ""?>">
             <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
+        </a>
+        <a href="<?= Router::url(['controller' => 'Photos', 'action' => 'index']) ?>"
+            class="item <?= $item == "photos" ? "active" : ""?>">
+            <i class="fa-solid fa-camera"></i>&nbsp;&nbsp;<?= __('Mes photos') ?>
         </a>
         <?php if ($isAdmin): ?>
             <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
