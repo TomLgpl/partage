@@ -45,6 +45,11 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Authentication.Authentication');
 
+        if(!empty($this->Authentication->getIdentity())) {
+            $isAdmin = $this->Authentication->getIdentity()->get('uti_lien') == '533e08dd-87b4-4117-aac1-dd0879eae9db';
+            $this->set(['isAdmin' => $isAdmin]);
+        }
+
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

@@ -14,6 +14,8 @@
  * @var \App\View\AppView $this
  */
 
+use Cake\Routing\Router;
+
 $cakeDescription = 'Partage';
 ?>
 <!DOCTYPE html>
@@ -43,6 +45,7 @@ $cakeDescription = 'Partage';
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+    <script src="https://kit.fontawesome.com/45f6709f50.js" crossorigin="anonymous"></script>
 
     <?= $this->Html->css('custom.css') ?>
 
@@ -52,9 +55,81 @@ $cakeDescription = 'Partage';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="ui fluid container">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
+
+<div class="ui fluid container">
+    <div class="ui grid">
+        <div class="computer only row">
+            <div class="column">
+                <div class="ui secondary pointing menu">
+                    <a href="<?= Router::url(['controller' => 'Pages', 'action' => 'index']) ?>"
+                       class="item <?= $item == "accueil" ? "active" : ""?>">
+                        <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
+                    </a>
+                    <?php if ($isAdmin): ?>
+                        <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
+                           class="item <?= $item == "admin" ? "active" : ""?>">
+                            <i class="fa-solid fa-lock"></i>&nbsp;&nbsp;<?= __('Admin') ?>
+                        </a>
+                    <?php endif; ?>
+                    <div class="right menu">
+                        <a class="item" href="<?= Router::url(['controller' => 'Auth', 'action' => 'logout']) ?>">
+                            <i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;<?= __('Se déconnecter') ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tablet mobile only row">
+            <div class="column">
+                <div class="ui secondary pointing menu">
+                    <a id="mobile_item" class="item">
+                        <i class="fa-solid fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+</div>
 </body>
 </html>
+
+<div class="ui pushable basic segment">
+    <div class="ui top sidebar vertical menu">
+        <a href="<?= Router::url(['controller' => 'Pages', 'action' => 'index']) ?>"
+           class="item <?= $item == "accueil" ? "active" : ""?>">
+            <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
+        </a>
+        <?php if ($isAdmin): ?>
+            <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
+               class="item <?= $item == "admin" ? "active" : ""?>">
+                <i class="fa-solid fa-lock"></i>&nbsp;&nbsp;<?= __('Admin') ?>
+            </a>
+        <?php endif; ?>
+        <div class="right menu">
+            <a class="item" href="<?= Router::url(['controller' => 'Auth', 'action' => 'logout']) ?>">
+                <i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;<?= __('Se déconnecter') ?>
+            </a>
+        </div>
+    </div>
+    <div class="pusher">
+        <div id="content" class="ui basic segment">
+            <?= $this->Flash->render() ?>
+            <br>
+            <?= $this->fetch('content') ?>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    $('.ui.sidebar').sidebar({
+        context: $('.ui.pushable.basic.segment'),
+        transition: 'overlay'
+    }).sidebar('attach events', '#mobile_item');
+
+</script>
