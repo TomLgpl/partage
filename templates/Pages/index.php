@@ -1,8 +1,6 @@
 <?php
 
-use Cake\Routing\Router; ?>
-
-
+?>
 
 <div class="ui container">
     <div class="ui inverted segment">

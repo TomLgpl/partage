@@ -119,4 +119,37 @@ class ParPhotoTable extends Table
         $conn->execute($req, $param);
     }
 
+    public function getDossierparUtilisateur($uti_lien){
+        $conn = ConnectionManager::get('default');
+        /*$req = "
+            SELECT
+
+            CONCAT(pho_dossier, '-', pho_jour, '-', pho_mois, '-', pho_annee) as dossier_lien
+            FROM par_photo
+            JOIN par_assigner on par_assigner.ass_pho_lien = par_photo.pho_lien
+            where ass_uti_lien = :uti_lien
+            group by dossier_lien
+        ";*/
+
+        $req = "
+            SELECT
+            min(pho_nom) as pho_nom,
+            CONCAT(pho_dossier, '-', pho_jour, '-', pho_mois, '-', pho_annee) as dossier_lien,
+            pho_dossier,
+            pho_jour,
+            pho_mois,
+            pho_annee
+            FROM par_photo
+            JOIN par_assigner on par_assigner.ass_pho_lien = par_photo.pho_lien
+            where ass_uti_lien = :uti_lien
+            GROUP BY (dossier_lien)
+            order by pho_annee desc, pho_mois desc, pho_jour desc
+        ";
+        $param = array(
+          "uti_lien" => $uti_lien
+        );
+        $res = $conn->execute($req, $param)->fetchAll('assoc');
+        return $res;
+    }
+
 }

@@ -13,6 +13,12 @@ class PhotosController extends AppController
 
     public function index()
     {
+        $this->loadModel('ParPhoto');
+        $dossiers = $this->ParPhoto->getDossierparUtilisateur($this->Authentication->getIdentity()->get('uti_lien'));
+        $this->set(['dossiers' => $dossiers]);
+    }
+
+    public function album(){
 
     }
 
