@@ -121,15 +121,6 @@ class ParPhotoTable extends Table
 
     public function getDossierparUtilisateur($uti_lien){
         $conn = ConnectionManager::get('default');
-        /*$req = "
-            SELECT
-
-            CONCAT(pho_dossier, '-', pho_jour, '-', pho_mois, '-', pho_annee) as dossier_lien
-            FROM par_photo
-            JOIN par_assigner on par_assigner.ass_pho_lien = par_photo.pho_lien
-            where ass_uti_lien = :uti_lien
-            group by dossier_lien
-        ";*/
 
         $req = "
             SELECT
@@ -149,6 +140,60 @@ class ParPhotoTable extends Table
           "uti_lien" => $uti_lien
         );
         $res = $conn->execute($req, $param)->fetchAll('assoc');
+        return $res;
+    }
+
+    public function getNbPhotoInAlbumByUti($dossier_lien, $uti_lien){
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT count(pho_lien) as nb
+            FROM par_photo
+            JOIN par_assigner on par_assigner.ass_pho_lien = par_photo.pho_lien
+            where ass_uti_lien = :uti_lien and CONCAT(pho_dossier, '-', pho_jour, '-', pho_mois, '-', pho_annee) = :dossier_lien
+        ";
+        $param = array(
+            "uti_lien" => $uti_lien,
+            "dossier_lien" => $dossier_lien
+        );
+        $res = $conn->execute($req, $param)->fetch('assoc');
+        return $res['nb'];
+    }
+
+    public function getPhotosInAlbumByUti($dossier_lien, $uti_lien){
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT
+            pho_nom,
+            pho_lien
+            FROM par_photo
+            JOIN par_assigner on par_assigner.ass_pho_lien = par_photo.pho_lien
+            where ass_uti_lien = :uti_lien and CONCAT(pho_dossier, '-', pho_jour, '-', pho_mois, '-', pho_annee) = :dossier_lien
+            order by pho_nom
+        ";
+        $param = array(
+            "uti_lien" => $uti_lien,
+            "dossier_lien" => $dossier_lien
+        );
+        $res = $conn->execute($req, $param)->fetchAll('assoc');
+        return $res;
+    }
+
+    public function getPhotoInfos($pho_lien){
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT
+            pho_nom,
+            pho_annee,
+            pho_mois,
+            pho_jour,
+            pho_dossier
+            FROM par_photo
+            WHERE pho_lien = :pho_lien
+        ";
+        $param = array(
+            "pho_lien" => $pho_lien
+        );
+        $res = $conn->execute($req, $param)->fetch("assoc");
         return $res;
     }
 

@@ -1,7 +1,7 @@
 <div class="ui basic segment">
 
-    <h2 class="ui header" style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"><?= __('Assigner des photos') ?></h2>
-
+    <h2 class="ui header" ><?= __('Assigner des photos') ?></h2>
+    <div style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"></div>
     <br>
     <div id="nb_a_assigner"></div>
     <br>

@@ -5,9 +5,10 @@ use Cake\Routing\Router; ?>
 
 <div class="ui container">
     <div class="ui segment">
-        <h2 class="ui header" style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%">
+        <h2 class="ui header" >
             <?= __('Mes albums') ?>
         </h2>
+        <div style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"></div>
         <br>
         <?php if(count($dossiers) == 0) : ?>
             <div class="ui container">
@@ -24,7 +25,7 @@ use Cake\Routing\Router; ?>
                 <div class="column">
                     <div class="ui card">
                         <div class="image">
-                            <img class="ui fluid image" src="http://tomlgpl.fr/partage/webroot/img/upload/<?= $dossier['pho_annee'] . '/' . ($dossier['pho_mois'] < 10 ? '0' . $dossier['pho_mois'] : $dossier['pho_mois']) . '/' . ($dossier['pho_jour'] < 10 ? '0' . $dossier['pho_jour'] : $dossier['pho_jour']) . '/' . $dossier['pho_dossier'] . '/' . $dossier['pho_nom'] ?>">
+                            <img class="ui fluid image" src="img/upload/<?= $dossier['pho_annee'] . '/' . ($dossier['pho_mois'] < 10 ? '0' . $dossier['pho_mois'] : $dossier['pho_mois']) . '/' . ($dossier['pho_jour'] < 10 ? '0' . $dossier['pho_jour'] : $dossier['pho_jour']) . '/' . $dossier['pho_dossier'] . '/' . $dossier['pho_nom'] ?>">
                         </div>
                         <div class="content">
                             <div class="header">

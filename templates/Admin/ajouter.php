@@ -1,7 +1,7 @@
 <div class="ui basic segment">
 
-    <h2 class="ui header" style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"><?= __('Ajouter des photos') ?></h2>
-
+    <h2 class="ui header" ><?= __('Ajouter des photos') ?></h2>
+    <div style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"></div>
     <br>
     <div class="ui input">
         <input type="date" id="date_files">

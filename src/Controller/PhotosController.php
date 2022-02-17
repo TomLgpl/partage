@@ -18,7 +18,20 @@ class PhotosController extends AppController
         $this->set(['dossiers' => $dossiers]);
     }
 
-    public function album(){
+    public function album($dossier_lien){
+        $this->loadModel('ParPhoto');
+        $nbPhotoUti = $this->ParPhoto->getNbPhotoInAlbumByUti($dossier_lien, $this->Authentication->getIdentity()->get('uti_lien'));
+        if($nbPhotoUti == 0) {
+            $this->Flash->error(__('Vous essayez de consultez un dossier qui n`\'existe pas ou dans lequel vous n\'avez pas de photos'));
+            return $this->redirect("/photos");
+        }
+        $photos = $this->ParPhoto->getPhotosInAlbumByUti($dossier_lien, $this->Authentication->getIdentity()->get('uti_lien'));
+        $param = explode("-", $dossier_lien);
+        $annee = $param[3];
+        $mois = $param[2] < 10 ? '0' . $param[2] : $param[2];
+        $jour = $param[1] < 10 ? '0' . $param[1] : $param[1];
+        $dossier = $param[0];
+        $this->set(compact('nbPhotoUti', ['photos', 'annee', 'mois', 'jour', 'dossier']));
 
     }
 
