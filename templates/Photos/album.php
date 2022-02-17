@@ -14,7 +14,7 @@ use Cake\Routing\Router; ?>
             <?php foreach ($photos as $photo) : ?>
                 <div class="column">
                     <div class="rounded image">
-                        <img class="ui rounded fluid image" alt="<?= $photo['pho_nom'] ?>" src="http://tomlgpl.fr/partage/img/upload/<?= $annee . '/' . $mois . '/' . $jour . '/' . $dossier . '/' . $photo['pho_nom'] ?>">
+                        <img class="ui rounded fluid image" alt="<?= $photo['pho_nom'] ?>" src="http://tomlgpl.fr/partage/img/miniatures/<?= $annee . '/' . $mois . '/' . $jour . '/' . $dossier . '/' . $photo['pho_nom'] ?>">
                     </div>
                     <a class="ui small fluid olive button" href="<?= Router::url(['controller' => 'Download', 'action' => 'photo', $photo["pho_lien"]]) ?>"><?= __('Télécharger') ?></a>
                 </div>

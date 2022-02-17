@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Utility\Resizer;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
 
@@ -60,6 +61,7 @@ class AdminController extends AppController
                         $d = explode('-', $date);
                         $this->ParPhoto->insertPhoto($name, $d[0], $d[1], $d[2], $dossier, $this->Authentication->getIdentity()->get('uti_lien'));
                         $image->moveTo($targetPath);
+                        Resizer::resizeImage($name, $d[2], $d[1], $d[0], $dossier);
                     }
                 }
             }

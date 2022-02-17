@@ -6,7 +6,7 @@
     <div id="nb_a_assigner"></div>
     <br>
     <div id="contenu">
-        <div id="photo_a_assigner"></div>
+        <div class="ui fluid image" id="photo_a_assigner"></div>
         <br>
         <select class="ui fluid search dropdown" multiple="" id="dropdown">
             <option value=""><?= __('Personne') ?></option>
@@ -64,7 +64,7 @@
                 else{
                     $('#contenu').show();
                     const infos = data[0];
-                    display_image("http://tomlgpl.fr/partage/webroot/img/upload/" + infos["pho_annee"] + "/" + (infos["pho_mois"] < 10 ? "0" + infos["pho_mois"] : infos["pho_mois"]) + "/" + (infos["pho_jour"] < 10 ? "0" + infos["pho_jour"] : infos["pho_jour"]) + "/" + infos["pho_dossier"] + "/" + infos["pho_nom"]);
+                    display_image("http://tomlgpl.fr/partage/webroot/img/miniatures/" + infos["pho_annee"] + "/" + (infos["pho_mois"] < 10 ? "0" + infos["pho_mois"] : infos["pho_mois"]) + "/" + (infos["pho_jour"] < 10 ? "0" + infos["pho_jour"] : infos["pho_jour"]) + "/" + infos["pho_dossier"] + "/" + infos["pho_nom"]);
                     $('#date_prise').text((infos["pho_jour"] < 10 ? "0" + infos["pho_jour"] : infos["pho_jour"]) + "/" + (infos["pho_mois"] < 10 ? "0" + infos["pho_mois"] : infos["pho_mois"]) + "/" + infos["pho_annee"]);
                     $('#nom_dossier').text(infos["pho_dossier"]);
                     $('#date_ajout').text(infos["pho_ajouter_date"]);

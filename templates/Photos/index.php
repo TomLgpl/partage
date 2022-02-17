@@ -25,7 +25,7 @@ use Cake\Routing\Router; ?>
                 <div class="column">
                     <div class="ui card">
                         <div class="image">
-                            <img class="ui fluid image" src="img/upload/<?= $dossier['pho_annee'] . '/' . ($dossier['pho_mois'] < 10 ? '0' . $dossier['pho_mois'] : $dossier['pho_mois']) . '/' . ($dossier['pho_jour'] < 10 ? '0' . $dossier['pho_jour'] : $dossier['pho_jour']) . '/' . $dossier['pho_dossier'] . '/' . $dossier['pho_nom'] ?>">
+                            <img class="ui fluid image" src="img/miniatures/<?= $dossier['pho_annee'] . '/' . ($dossier['pho_mois'] < 10 ? '0' . $dossier['pho_mois'] : $dossier['pho_mois']) . '/' . ($dossier['pho_jour'] < 10 ? '0' . $dossier['pho_jour'] : $dossier['pho_jour']) . '/' . $dossier['pho_dossier'] . '/' . $dossier['pho_nom'] ?>">
                         </div>
                         <div class="content">
                             <div class="header">
