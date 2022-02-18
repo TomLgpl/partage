@@ -12,7 +12,7 @@
     </div>
     <br><br>
     <div class="ui input">
-        <input type="file" id="input_files" multiple>
+        <input type="file" id="input_files" multiple accept="image/jpeg, image/png">
     </div>
     <br>
     <div id="info"></div>
@@ -121,6 +121,7 @@
         $('#progress_bar').width('0%');
         date = $('#date_files').val();
         dir = $('#dir_files').val();
+        dir.replace(' ', '_');
         $('#send_files').addClass('loading');
         $('#send_files').addClass('disabled');
         nbItemTotal = files.length;

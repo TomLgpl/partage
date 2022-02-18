@@ -5,7 +5,7 @@ use Cake\Routing\Router; ?>
 <div class="ui container">
     <div class="ui segment">
         <h2 class="ui header" >
-            <?= $dossier ?>
+            <?= str_replace(["-", "_"], "&nbsp;", $dossier) ?>
         </h2>
         <?= $jour . '/' . $mois . '/' . $annee ?>
         <div style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"></div>

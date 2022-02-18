@@ -29,7 +29,7 @@ use Cake\Routing\Router; ?>
                         </div>
                         <div class="content">
                             <div class="header">
-                                <?= str_replace(["-", "_"], "", $dossier['pho_dossier']) ?>
+                                <?= str_replace(["-", "_"], "&nbsp;", $dossier['pho_dossier']) ?>
                             </div>
                             <div class="meta">
                                 <span><?= ($dossier['pho_jour'] < 10 ? '0' . $dossier['pho_jour'] : $dossier['pho_jour']) . '/' . ($dossier['pho_mois'] < 10 ? '0' . $dossier['pho_mois'] : $dossier['pho_mois']) . '/' . $dossier['pho_annee'] ?></span>
