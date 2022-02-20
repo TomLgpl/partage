@@ -22,7 +22,6 @@ class AdminController extends AppController
     }
 
 
-
     public function index()
     {
         $this->isAuthorize();
@@ -92,17 +91,32 @@ class AdminController extends AppController
     public function assigner()
     {
         $this->isAuthorize();
-        if($this->request->is('post')) {
+        if ($this->request->is('post')) {
             $this->loadModel("ParAssigner");
             $personnes = explode(",", $this->request->getData("personnes"));
             $pho_lien = $this->request->getData("photo");
             pr($personnes);
-            if(!empty($personnes[0]) && !empty($pho_lien)){
-                foreach ($personnes as $personne){
+            if (!empty($personnes[0]) && !empty($pho_lien)) {
+                foreach ($personnes as $personne) {
                     $this->ParAssigner->assigner($pho_lien, $personne);
                 }
             }
             die;
+        }
+        return $this->redirect('/admin');
+    }
+
+    public function ajouterUtilisateur()
+    {
+        $this->isAuthorize();
+        if($this->request->is('post')) {
+            $this->loadModel('ParUtilisateurs');
+            $identifiant = $this->request->getData('identifiant');
+            $prenom = $this->request->getData('prenom');
+            $nom = $this->request->getData('nom');
+            $mdp = $this->request->getData('motdepasse');
+            $this->ParUtilisateurs->ajouterUtilisateur($identifiant, $prenom, $nom, $mdp);
+            die();
         }
         return $this->redirect('/admin');
     }

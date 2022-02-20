@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Utility\Uuid;
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -111,4 +112,35 @@ class ParUtilisateursTable extends Table
 
         return $conn->execute($req)->fetchAll('assoc');
     }
+
+    public function ajouterUtilisateur($identifiant, $prenom, $nom, $mdp) {
+        $conn = ConnectionManager::get('default');
+        $req = "
+            INSERT INTO par_utilisateurs
+            (
+                uti_lien,
+                uti_identifiant,
+                uti_mot_de_passe,
+                uti_nom,
+                uti_prenom
+            )
+            VALUES
+            (
+                :uti_lien,
+                :identifiant,
+                :mdp,
+                :nom,
+                :prenom
+            )
+        ";
+        $param = array(
+            'uti_lien' => Uuid::gen_uuid(),
+            'identifiant' => $identifiant,
+            'mdp' => $mdp,
+            'nom' => $nom,
+            'prenom' => $prenom
+        );
+        $conn->execute($req, $param);
+    }
+
 }
