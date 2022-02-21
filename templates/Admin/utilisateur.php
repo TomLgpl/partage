@@ -38,12 +38,30 @@
             </button>
         </div>
     </div>
+    <br>
+    <div style="border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 2%"></div>
+    <br>
+
+    <select class="ui search selection dropdown" id="uti_dropdown">
+        <option value="" selected="selected"><?= __('Sélectionner une personne') ?></option>
+        <?php foreach ($personnes as $personne) : ?>
+            <option value="<?= $personne["uti_lien"] ?>"><?= $personne["uti_prenom"] . " " . $personne["uti_nom"] ?></option>
+        <?php endforeach; ?>
+    </select>
+
+    <div class="ui segment">
+        <?= __('Aucune information à afficher.') ?>
+    </div>
 
 </div>
 
 <script>
 
+    $('.ui.dropdown')
+        .dropdown();
+
     $(document).ready(function () {
+        $('#uti_dropdown').dropdown('clear');
         $('#identifiant').val("");
         $('#nom').val("");
         $('#prenom').val("");
