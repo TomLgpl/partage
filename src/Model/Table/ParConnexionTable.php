@@ -92,4 +92,19 @@ class ParConnexionTable extends Table
         $conn->execute($req, $param);
     }
 
+    public function getUtiConnexions($uti_lien){
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT con_horodatage, con_ip
+            FROM par_connexion
+            Where con_utilisateur_lien = :uti_lien
+            order by con_horodatage desc
+        ";
+        $param = array(
+          "uti_lien" => $uti_lien
+        );
+        $res = $conn->execute($req, $param)->fetchAll("assoc");
+        return $res;
+    }
+
 }

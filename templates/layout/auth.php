@@ -54,6 +54,7 @@ $cakeDescription = 'Partage';
         <h1 class="ui header"><?= __('Partage') ?></h1>
         <h2 class="ui header"><?= __('Connexion') ?></h2>
         <br>
+
         <?= $this->Flash->render() ?>
         <br>
         <?= $this->fetch('content') ?>

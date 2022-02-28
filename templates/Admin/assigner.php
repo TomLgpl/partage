@@ -57,7 +57,7 @@
         $.ajax({
             url: "admin/gePhotoInfoAAssigner",
             success: function (data) {
-                $('#dropdown').dropdown('clear');
+                //$('#dropdown').dropdown('clear');
                 if(data.length === 0) {
                     $('#contenu').hide();
                 }

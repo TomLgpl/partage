@@ -143,4 +143,19 @@ class ParUtilisateursTable extends Table
         $conn->execute($req, $param);
     }
 
+    public function getUtiInfo($uti_lien) {
+        $conn = ConnectionManager::get('default');
+        $req = "
+            SELECT *
+            FROM par_utilisateurs
+            Where uti_lien = :uti_lien
+        ";
+        $param = array(
+            "uti_lien" => $uti_lien
+        );
+        $res = $conn->execute($req, $param)->fetch('assoc');
+        return $res;
+    }
+
+
 }

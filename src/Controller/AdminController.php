@@ -121,6 +121,21 @@ class AdminController extends AppController
         return $this->redirect('/admin');
     }
 
+    public function getUtiInfo(){
+        $this->isAuthorize();
+        if ($this->request->is('post')) {
+            $uti_lien = $this->request->getData('uti_lien');
+            $this->loadModel('ParUtilisateurs');
+            $this->loadModel('ParConnexion');
+            $result = $this->ParUtilisateurs->getUtiInfo($uti_lien);
+            if(empty($result))
+                return $this->response->withStringBody("none");
+            $result['connexion'] = $this->ParConnexion->getUtiConnexions($uti_lien);
+            return $this->response->withType('json')->withStringBody(json_encode($result));
+        }
+        return $this->redirect('/');
+    }
+
     private function isAuthorize()
     {
         if (!$this->Authentication->getIdentity()->get('uti_is_admin')) {

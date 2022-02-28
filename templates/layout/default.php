@@ -58,11 +58,17 @@ $cakeDescription = 'Partage';
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PR5TRG27TQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-PR5TRG27TQ');
     </script>
+
+
 
 </head>
 <body>
@@ -73,16 +79,16 @@ $cakeDescription = 'Partage';
             <div class="column">
                 <div class="ui secondary pointing menu">
                     <a href="<?= Router::url(['controller' => 'Pages', 'action' => 'index']) ?>"
-                       class="item <?= $item == "accueil" ? "active" : ""?>">
+                       class="item <?= $item == "accueil" ? "active" : "" ?>">
                         <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
                     </a>
                     <a href="<?= Router::url(['controller' => 'Photos', 'action' => 'index']) ?>"
-                       class="item <?= $item == "photos" ? "active" : ""?>">
+                       class="item <?= $item == "photos" ? "active" : "" ?>">
                         <i class="fa-solid fa-camera"></i>&nbsp;&nbsp;<?= __('Mes photos') ?>
                     </a>
                     <?php if ($isAdmin): ?>
                         <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
-                           class="item <?= $item == "admin" ? "active" : ""?>">
+                           class="item <?= $item == "admin" ? "active" : "" ?>">
                             <i class="fa-solid fa-lock"></i>&nbsp;&nbsp;<?= __('Admin') ?>
                         </a>
                     <?php endif; ?>
@@ -106,7 +112,6 @@ $cakeDescription = 'Partage';
     </div>
 
 
-
 </div>
 </body>
 </html>
@@ -114,16 +119,16 @@ $cakeDescription = 'Partage';
 <div class="ui pushable basic segment">
     <div class="ui top sidebar vertical menu">
         <a href="<?= Router::url(['controller' => 'Pages', 'action' => 'index']) ?>"
-           class="item <?= $item == "accueil" ? "active" : ""?>">
+           class="item <?= $item == "accueil" ? "active" : "" ?>">
             <i class="fa-solid fa-house"></i>&nbsp;&nbsp;<?= __('Accueil') ?>
         </a>
         <a href="<?= Router::url(['controller' => 'Photos', 'action' => 'index']) ?>"
-            class="item <?= $item == "photos" ? "active" : ""?>">
+           class="item <?= $item == "photos" ? "active" : "" ?>">
             <i class="fa-solid fa-camera"></i>&nbsp;&nbsp;<?= __('Mes photos') ?>
         </a>
         <?php if ($isAdmin): ?>
             <a href="<?= Router::url(['controller' => 'Admin', 'action' => 'index']) ?>"
-               class="item <?= $item == "admin" ? "active" : ""?>">
+               class="item <?= $item == "admin" ? "active" : "" ?>">
                 <i class="fa-solid fa-lock"></i>&nbsp;&nbsp;<?= __('Admin') ?>
             </a>
         <?php endif; ?>
@@ -141,7 +146,6 @@ $cakeDescription = 'Partage';
         </div>
     </div>
 </div>
-
 
 
 <script>

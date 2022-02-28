@@ -49,8 +49,33 @@
         <?php endforeach; ?>
     </select>
 
-    <div class="ui segment">
-        <?= __('Aucune information à afficher.') ?>
+    <div id="result" class="ui segment">
+        <div id="no_result"><?= __('Aucune information à afficher.') ?></div>
+        <div id="with_result" class="ui stackable two column grid">
+            <div class="column">
+                <?= __('Nom : ') ?><span id="uti_nom"></span><br>
+                <?= __('Prénom : ') ?><span id="uti_prenom"></span><br>
+                <br>
+                <?= __('Identifiant : ') ?><span id="uti_identifiant"></span><br>
+                <?= __('Mot de passe : ') ?><span style="color: white" id="uti_mdp"></span><br>
+            </div>
+            <div class="column">
+                <div style="max-height: 20em; overflow-y: auto; overflow-x: hidden">
+                    <table class="ui celled striped table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">
+                                    <?= __('Historique des connexions') ?>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_co">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -59,6 +84,9 @@
 
     $('.ui.dropdown')
         .dropdown();
+
+
+
 
     $(document).ready(function () {
         $('#uti_dropdown').dropdown('clear');
@@ -98,6 +126,44 @@
                 alert("Utilisateur non inséré");
             }
         });
-    })
+    });
+
+    $('#uti_dropdown').change(function () {
+        const personne = $('#uti_dropdown').val();
+        let formData = new FormData;
+        formData.append("uti_lien", personne);
+        $.ajax({
+            url: "admin/getUtiInfo",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function (){
+                $('#result').addClass("loading");
+            },
+            success: function (data) {
+                if(data === 'none') {
+                    $('#no_result').show();
+                    $('#with_result').hide();
+                }
+                else{
+                    $('#no_result').hide();
+                    $('#with_result').show();
+                    $('#uti_nom').text(data["uti_nom"]);
+                    $('#uti_prenom').text(data["uti_prenom"]);
+                    $('#uti_identifiant').text(data["uti_identifiant"]);
+                    $('#uti_mdp').text(data["uti_mot_de_passe"]);
+                    $('#table_co').empty();
+                    const connexions = data["connexion"];
+                    for(var i = 0; i < connexions.length; i++) {
+                        $('#table_co').append("<tr><td>" + connexions[i]["con_horodatage"] + "</td><td>" + connexions[i]["con_ip"] + "</td></tr>");
+                    }
+                    console.log(connexions);
+                }
+
+                $('#result').removeClass("loading");
+            }
+        });
+    });
 
 </script>
