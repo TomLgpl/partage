@@ -46,6 +46,9 @@ $cakeDescription = 'Partage';
         gtag('config', 'G-PR5TRG27TQ');
     </script>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6636987349048261"
+            crossorigin="anonymous"></script>
+
 </head>
 
 <body>

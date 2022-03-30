@@ -8,7 +8,7 @@
         <br>
         Pour voir tes photos, il suffit d'aller dans l'onglet <b>Mes photos</b>.
         <br><br>
-        En cas de soucis, n'hésites pas à me contacter ! (Si tu vois des photos qui ne sont pas toi par exemple)
+        En cas de soucis, n'hésites pas à me contacter ! (Si tu vois des photos qui ne sont pas à toi par exemple)
         <br><br>
         <a href="mailto:tomlegoupil@gmail.com">tomlegoupil@gmail.com</a>
     </div>

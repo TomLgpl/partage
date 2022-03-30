@@ -37,14 +37,14 @@ class AdminController extends AppController
             //on vérifie que les dossiers existent bien
             $targetPath = WWW_ROOT . 'img' . DS . 'upload';
             $date = $this->request->getData('date');
-            $dossier = $this->request->getData('dir');
+            $dossier = str_replace(' ', '_', $this->request->getData('dir'));
             foreach (explode('-', $date) as $dir) {
                 $targetPath .= DS . $dir;
                 if (!is_dir($targetPath)) {
                     mkdir($targetPath);
                 }
             }
-            $targetPath .= DS . str_replace(' ', '_', $dossier);
+            $targetPath .= DS . $dossier;
             if (!is_dir($targetPath)) {
                 mkdir($targetPath);
             }
@@ -77,7 +77,7 @@ class AdminController extends AppController
             $nb = $this->ParAssigner->getNbAAssigner();
             return $this->response->withStringBody($nb . "");
         }
-        $this->redirect('/admin');
+        return $this->redirect('/admin');
     }
 
     public function gePhotoInfoAAssigner()
@@ -136,12 +136,22 @@ class AdminController extends AppController
         return $this->redirect('/');
     }
 
+    public function getAlbum() {
+        $this->isAuthorize();
+        if($this->request->is('post')) {
+            $this->loadModel('ParPhoto');
+            $this->ParPhoto->getAllAlbumInfo();
+        }
+        return $this->redirect('/');
+    }
+
     private function isAuthorize()
     {
         if (!$this->Authentication->getIdentity()->get('uti_is_admin')) {
             $this->Flash->error(__('Vous n\'avez pas l\'autorisation de consulter cette page.'));
             return $this->redirect('/');
         }
+        return true;
     }
 
 }

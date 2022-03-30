@@ -153,12 +153,12 @@
                     $('#uti_prenom').text(data["uti_prenom"]);
                     $('#uti_identifiant').text(data["uti_identifiant"]);
                     $('#uti_mdp').text(data["uti_mot_de_passe"]);
-                    $('#table_co').empty();
+                    var table_co = $('#table_co');
+                    table_co.empty();
                     const connexions = data["connexion"];
                     for(var i = 0; i < connexions.length; i++) {
-                        $('#table_co').append("<tr><td>" + connexions[i]["con_horodatage"] + "</td><td>" + connexions[i]["con_ip"] + "</td></tr>");
+                        table_co.append("<tr><td>" + connexions[i]["con_horodatage"] + "</td><td>" + connexions[i]["con_ip"] + "</td></tr>");
                     }
-                    console.log(connexions);
                 }
 
                 $('#result').removeClass("loading");
